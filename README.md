@@ -25,7 +25,7 @@ The page auto-refreshes every 10 seconds.
 - **NTP peer table** from `ntpq -pn` with tally codes, offset, jitter, reach, and association condition badges
 - **Full `ntpq -c rv` variable dump** with priority-ordered fields and light unit labels
 - **PPS discipline card** showing lock state, refid, offset, frequency, jitter, and wander
-- **GPS/GPSD status card** from live `gpspipe` JSON (TPV + SKY) and NMEA sentence streams — fix quality, satellite count, HDOP/PDOP/VDOP, lat/lon, altitude, speed, and UTC time
+- **GPS/GPSD status card** from live `gpspipe` JSON (TPV + SKY) and NMEA sentence streams: fix quality, satellite count, HDOP/PDOP/VDOP, lat/lon, altitude, speed, and UTC time
 - **Kernel timekeeping block** from `adjtimex --print` : offset (µs), frequency (raw + estimated ppm), max error, estimated error, time constant, and status word
 - **Leap second awareness**: parses `leap-seconds.list` from disk to show the current TAI-UTC offset and any scheduled future leap second
 - **Leap indicator badge** decoded from `ntpq -c rv` (none / insert pending / delete pending / alarm)
@@ -64,15 +64,6 @@ Additional helpers:
 - `nmea_degmin_to_decimal()` — converts NMEA degree-minute notation to signed decimal degrees
 - `nmea_checksum_ok()` — validates NMEA sentence XOR checksums
 
-### index.php — View Layer
-
-Calls `run_cmd()` for each data source, processes the results through the parser functions, merges the `ntpq -pn` peer rows with the `ntpq -c as` association rows (joined on row index), and renders the HTML. All values are passed through `html()` (a thin wrapper around `htmlspecialchars()`) before being written into the page.
-
-### assets/style.css — Stylesheet
-
-A self-contained dark theme with no external fonts or CDN dependencies. Uses flexbox for the card grid (`.row` / `.col-6` / `.col-12`), pill-shaped badges (`.badge.ok`, `.badge.warn`, `.badge.bad`), and a `<pre>`-friendly monospace block for raw service output.
-
----
 
 ## Dashboard Sections
 
